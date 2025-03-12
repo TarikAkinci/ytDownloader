@@ -1,4 +1,4 @@
-from pytube import YouTube
+from pytubefix import YouTube
 import os
 import ssl
 import certifi
@@ -14,4 +14,4 @@ def downloadYoutube(vid_url, path):
     yt.download(path)
 
 url = input('Input URL:\n')
-downloadYoutube(url, "/Users/tarikakinci/Desktop")
+downloadYoutube(url, "C:/Users/atari/Downloads")
