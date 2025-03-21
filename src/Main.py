@@ -1,5 +1,4 @@
 from pytubefix import YouTube
-from moviepy import VideoFileClip, AudioFileClip, CompositeAudioClip
 import subprocess
 import os
 import ssl
@@ -12,6 +11,8 @@ def download_video(vid_url, path):
     vid_stream = yt.streams.filter(adaptive=True, file_extension='mp4', only_video=True, res='720p').first()
     audio_stream = yt.streams.filter(adaptive=True, file_extension='mp4', only_audio=True).order_by('abr').desc().first()
 
+    if vid_stream is None:
+        vid_stream = yt.streams.filter(adaptive=True, file_extension='mp4', only_video=True).order_by('resolution').first()
     vid_stream.download(output_path=path, filename='video.mp4')
     audio_stream.download(output_path=path, filename='audio.mp4')
 
@@ -40,9 +41,10 @@ def remux_streams(path, output_filename):
     os.remove(audio_path)
     print(f'Remuxing complete: {output_path}')
 
+
 if __name__ == "__main__":
     url = input('Input URL:\n')
-    path = "C:/Users/atari/Downloads"
+    path = "C:/Users/zakin/Downloads"
     file_extension = ''
     while file_extension != 'mp3' and file_extension != 'mp4':
         file_extension = input('mp3 or mp4?\n')
