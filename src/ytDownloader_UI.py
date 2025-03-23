@@ -115,7 +115,7 @@ class HoverButton(QtWidgets.QPushButton):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.url = ""
-        self.path = "C:/Users/atari/Downloads"
+        self.path = "C:/Users/atari/Desktop"
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(726, 465)
@@ -308,6 +308,7 @@ class Ui_MainWindow(object):
     def on_mp4_button_pressed(self):
         title = Downloader.download_video(self.url, self.path)
         output_filename = title + ".mp4"
+        output_filename = re.sub(r'[\\/*?:"<>|]', "", title)
         Downloader.remux_streams(self.path, output_filename)
 
     def insta_download_button_pressed(self):
