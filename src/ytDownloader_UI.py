@@ -27,7 +27,8 @@ class Downloader:
     def download_audio(vid_url, path):
         yt = YouTube(vid_url)
         audio_stream = yt.streams.filter(adaptive=True, file_extension='mp4', only_audio=True).order_by('abr').desc().first()
-        audio_stream.download(output_path=path, filename=yt.title + '.mp3')
+        title = re.sub(r'[\\/*?:"<>|.]', "", yt.title)
+        audio_stream.download(output_path=path, filename=title + '.mp3')
 
     def remux_streams(path, output_filename):
         video_path = os.path.join(path, 'video.mp4')
@@ -307,8 +308,8 @@ class Ui_MainWindow(object):
 
     def on_mp4_button_pressed(self):
         title = Downloader.download_video(self.url, self.path)
-        output_filename = title + ".mp4"
-        output_filename = re.sub(r'[\\/*?:"<>|]', "", title)
+        output_filename = re.sub(r'[\\/*?:"<>|.]', "", title)
+        output_filename = output_filename + ".mp4"
         Downloader.remux_streams(self.path, output_filename)
 
     def insta_download_button_pressed(self):
