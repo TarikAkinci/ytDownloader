@@ -1,8 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPropertyAnimation
 import shutil
-import sys
-from PySide6.QtWidgets import *
 from pytubefix import YouTube
 import instaloader
 import subprocess
@@ -124,17 +122,22 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        yt_icon_path = os.path.join(BASE_DIR, 'icons', 'yticon.png')
+
         self.yt_icon = QtWidgets.QLabel(self.centralwidget)
         self.yt_icon.setGeometry(QtCore.QRect(60, 120, 281, 191))
         self.yt_icon.setText("")
-        self.yt_icon.setPixmap(QtGui.QPixmap("./icons/yticon.png"))
+        self.yt_icon.setPixmap(QtGui.QPixmap(yt_icon_path))
         self.yt_icon.setScaledContents(True)
         self.yt_icon.setObjectName("yt_icon")
 
+        insta_icon_path = os.path.join(BASE_DIR, 'icons', 'instaicon.png')
         self.insta_icon = QtWidgets.QLabel(self.centralwidget)
         self.insta_icon.setGeometry(QtCore.QRect(460, 120, 191, 191))
         self.insta_icon.setText("")
-        self.insta_icon.setPixmap(QtGui.QPixmap("./icons/instaicon.png"))
+        self.insta_icon.setPixmap(QtGui.QPixmap(insta_icon_path))
         self.insta_icon.setScaledContents(True)
         self.insta_icon.setObjectName("insta_icon")
 
@@ -219,6 +222,7 @@ class Ui_MainWindow(object):
         self.yt_mp4_button.pressed.connect(self.on_mp4_button_pressed)
         self.yt_mp4_button.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
         self.yt_mp4_button.setGeometry(110, 380, 70, 45)
+        self.yt_mp4_button.hide()
 
         self.yt_mp3 = QtWidgets.QLabel(self.centralwidget)
         self.yt_mp3.setGeometry(QtCore.QRect(220, 380, 70, 45))
@@ -241,6 +245,7 @@ class Ui_MainWindow(object):
         self.yt_mp3_button.pressed.connect(self.on_mp3_button_pressed)
         self.yt_mp3_button.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
         self.yt_mp3_button.setGeometry(220, 380, 70, 45)
+        self.yt_mp3_button.hide()
 
         self.insta_download = QtWidgets.QLabel(self.centralwidget)
         self.insta_download.setGeometry(QtCore.QRect(490, 380, 130, 45))
@@ -287,7 +292,8 @@ class Ui_MainWindow(object):
 
     def on_yt_enter(self):
         self.url = self.yttextField.text().strip()
-        print(self.url)
+        self.yt_mp4_button.show()
+        self.yt_mp3_button.show()
         self.yt_mp4.show()
         self.yt_mp3.show()
 
