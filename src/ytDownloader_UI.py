@@ -116,6 +116,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.url = ""
         self.path = "C:/Users/atari/Downloads"
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(726, 465)
         MainWindow.setStyleSheet("background-color: rgb(18, 18, 18);")
@@ -123,7 +124,6 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
 
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         yt_icon_path = os.path.join(BASE_DIR, 'icons', 'yticon.png')
 
         self.yt_icon = QtWidgets.QLabel(self.centralwidget)
@@ -317,12 +317,16 @@ if __name__ == "__main__":
     import sys
     from PyQt5.QtCore import Qt
     from PyQt5.QtWidgets import QApplication
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
     if hasattr(Qt, 'AA_EnableHighDpiScaling'):
         QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     if hasattr(Qt, 'AA_UseHighDpiPixmaps'):
         QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
 
     app = QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon(os.path.join(BASE_DIR, "icons", "icon.png")))
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
