@@ -1,0 +1,3 @@
+([('ytDownloader_UI',
+   '/Users/tarikakinci/Desktop/ytDownloader/src/dist/ytDownloader_UI',
+   'EXECUTABLE')],)

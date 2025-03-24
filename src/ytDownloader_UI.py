@@ -116,7 +116,7 @@ class HoverButton(QtWidgets.QPushButton):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.url = ""
-        self.path = "C:/Users/atari/Desktop"
+        self.path = "/Users/tarikakinci/Desktop/"
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(726, 465)
